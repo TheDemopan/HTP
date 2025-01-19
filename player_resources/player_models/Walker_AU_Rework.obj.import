@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://xnsg6lbbs0mo"
+path="res://.godot/imported/Walker_AU_Rework.obj-df13945f7801edad2ae55594c1014bef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Walker_AU_Rework.obj-df13945f7801edad2ae55594c1014bef.mesh"]
+
+source_file="res://player_resources/player_models/Walker_AU_Rework.obj"
+dest_files=["res://.godot/imported/Walker_AU_Rework.obj-df13945f7801edad2ae55594c1014bef.mesh", "res://.godot/imported/Walker_AU_Rework.obj-df13945f7801edad2ae55594c1014bef.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

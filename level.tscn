@@ -1,0 +1,194 @@
+[gd_scene load_steps=16 format=3 uid="uid://bv35plgtdndvx"]
+
+[ext_resource type="Script" path="res://playerscripts/TestPlayerScript.gd" id="1_bqp06"]
+[ext_resource type="Shader" path="res://outline.gdshader" id="2_5w0sy"]
+[ext_resource type="Texture2D" uid="uid://bacmxwbahjcgd" path="res://player_resources/player_textures/AUtexture.png" id="3_15tc6"]
+[ext_resource type="ArrayMesh" uid="uid://xnsg6lbbs0mo" path="res://player_resources/player_models/Walker_AU_Rework.obj" id="3_53qs4"]
+[ext_resource type="Texture2D" uid="uid://54478xpbfwr5" path="res://player_resources/AUtexture_EMS.png" id="4_ih17p"]
+[ext_resource type="Shader" uid="uid://csvfo8tc2jg7e" path="res://level.tres" id="6_1lots"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv7hi"]
+albedo_color = Color(0.439216, 0.258824, 0.0627451, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dahe8"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_slerm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8d5xb"]
+albedo_texture = ExtResource("3_15tc6")
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.694118, 0.929412, 0.0313726, 1)
+emission_energy_multiplier = 16.0
+emission_operator = 1
+emission_texture = ExtResource("4_ih17p")
+rim_tint = 0.83
+clearcoat_enabled = true
+clearcoat = 0.24
+clearcoat_roughness = 0.6
+anisotropy = -1.0
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+subsurf_scatter_texture = ExtResource("3_15tc6")
+subsurf_scatter_transmittance_depth = 7.445
+refraction_scale = 1.0
+texture_filter = 0
+
+[sub_resource type="Environment" id="Environment_0gy3h"]
+background_mode = 1
+background_color = Color(0.0862745, 0.0235294, 0.188235, 1)
+volumetric_fog_density = 0.0184
+volumetric_fog_albedo = Color(0.113725, 0.32549, 0.188235, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m17ss"]
+render_priority = 0
+shader = ExtResource("2_5w0sy")
+shader_parameter/depth_threshold = 0.05
+shader_parameter/normal_threshold = 0.6
+shader_parameter/darken_amount = 0.3
+shader_parameter/lighten_amount = 1.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_c6dh3"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4uaee"]
+render_priority = 0
+shader = ExtResource("6_1lots")
+shader_parameter/Strength = 2.0
+shader_parameter/EdgeColor = Color(0.756863, 0.647059, 0.380392, 1)
+shader_parameter/Speed = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wsmou"]
+
+[node name="Level" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="Ground" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_iv7hi")
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground2" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38128, -18.5248)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground2/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground4" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.38128, -18.5248)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground4/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground5" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.38128, -18.5248)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground5/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground6" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.38128, -28.5248)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground6/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground7" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38128, -28.5248)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground7/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground8" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.38128, -28.5248)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground8/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Ground3" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0.700316, -9)
+size = Vector3(10, 1, 10)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Ground3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Ground3/StaticBody3D"]
+shape = SubResource("BoxShape3D_dahe8")
+
+[node name="Player" type="CharacterBody3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.434986, 0)
+disable_mode = 2
+script = ExtResource("1_bqp06")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.957849, 0)
+shape = SubResource("CapsuleShape3D_slerm")
+
+[node name="WalkerAuRework" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8d5xb")
+mesh = ExtResource("3_53qs4")
+skeleton = NodePath("../../../..")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Player"]
+transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 20, 20, 20)
+environment = SubResource("Environment_0gy3h")
+projection = 1
+size = 20.0
+
+[node name="PostProcessing" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Player/Camera3D"]
+transform = Transform3D(0.707107, 0, -0.707107, -0.353553, 0.866025, -0.353553, 0.612372, 0.5, 0.612372, 0, -4.1007, -35.0274)
+material_override = SubResource("ShaderMaterial_m17ss")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_c6dh3")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 1, 0, 7.93486, -18.4542)
+material_override = SubResource("ShaderMaterial_4uaee")
+mesh = SubResource("BoxMesh_wsmou")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 6, 6)
+shadow_enabled = true
+shadow_normal_bias = 3.334
+shadow_reverse_cull_face = true
+shadow_blur = 1.2
